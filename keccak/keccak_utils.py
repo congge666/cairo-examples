@@ -57,11 +57,11 @@ def keccak_round(a, rc):
 
 
 def keccak_func(values):
-    # Reshapre values to a matrix.
+    # Reshape values to a matrix.
     values = [[values[5 * y + x] for y in range(5)] for x in range(5)]
     for rc in ROUND_CONSTANTS:
         values = keccak_round(values, rc)
-    # Reshapre values to a flat list.
+    # Reshape values to a flat list.
     values = [values[y][x] for x in range(5) for y in range(5)]
 
     return values

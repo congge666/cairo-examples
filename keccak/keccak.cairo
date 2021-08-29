@@ -39,9 +39,11 @@ func keccak{range_check_ptr, keccak_ptr : felt*}(input : felt*, n_bytes : felt) 
 
     let output = keccak_ptr
     %{
-        from keccak_utils import keccak_func
+        from starkware.cairo.common.cairo_keccak.keccak_utils import keccak_func
+        _keccak_state_size_felts = int(ids.KECCAK_STATE_SIZE_FELTS)
+        assert 0 <= _keccak_state_size_felts < 100
         output_values = keccak_func(memory.get_range(
-            ids.keccak_ptr_start, ids.KECCAK_STATE_SIZE_FELTS))
+            ids.keccak_ptr_start, _keccak_state_size_felts))
         segments.write_arg(ids.output, output_values)
     %}
     let keccak_ptr = keccak_ptr + KECCAK_STATE_SIZE_FELTS
@@ -164,8 +166,12 @@ func finalize_keccak{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
 
     %{
         # Add dummy pairs of input and output.
-        inp = [0] * ids.KECCAK_STATE_SIZE_FELTS
-        padding = (inp + keccak_func(inp)) * ids.BLOCK_SIZE
+        _keccak_state_size_felts = int(ids.KECCAK_STATE_SIZE_FELTS)
+        _block_size = int(ids.BLOCK_SIZE)
+        assert 0 <= _keccak_state_size_felts < 100
+        assert 0 <= _block_size < 1000
+        inp = [0] * _keccak_state_size_felts
+        padding = (inp + keccak_func(inp)) * _block_size
         segments.write_arg(ids.keccak_ptr_end, padding)
     %}
 

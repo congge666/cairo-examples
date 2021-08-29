@@ -84,15 +84,6 @@ func main{output_ptr : felt*, range_check_ptr, bitwise_ptr : BitwiseBuiltin*}():
         # Print the number of used bitwise builtin instances.
         bitwise_start = ids.bitwise_ptr_start.address_
         print('Bitwise usage:', (ids.bitwise_ptr.address_ - bitwise_start) / 5)
-
-        # Fill memory slots in the builtin, due to the direct usage. This won't be necessary in
-        # future versions.
-        for i in range(0, ids.bitwise_ptr.address_ - bitwise_start, 5):
-            x = memory[bitwise_start + i]
-            y = memory[bitwise_start + i + 1]
-            memory[bitwise_start + i + 2] = x & y
-            memory[bitwise_start + i + 3] = x ^ y
-            memory[bitwise_start + i + 4] = x | y
     %}
 
     return ()
