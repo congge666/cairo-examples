@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 cd $(dirname $0)
 cairo-compile keccak_example.cairo --output keccak_example_compiled.json

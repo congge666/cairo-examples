@@ -2,7 +2,7 @@
 
 # This example deploys a contract that computes the keccak hash of the given input and calls it.
 
-set -e
+set -ex
 
 starknet-compile keccak_contract.cairo --output keccak_contract_compiled.json \
     --abi keccak_contract_abi.json

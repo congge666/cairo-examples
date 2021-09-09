@@ -1,8 +1,8 @@
-from memset import memset
 from packed_keccak import BLOCK_SIZE, packed_keccak_func
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
 from starkware.cairo.common.math import assert_nn_le, unsigned_div_rem
+from starkware.cairo.common.memset import memset
 from starkware.cairo.common.pow import pow
 
 const KECCAK_STATE_SIZE_FELTS = 25
