@@ -9,7 +9,7 @@ from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
 # input should consist of a list of 32-bit integers (each representing 4 bytes, in big endian).
 # n_bytes should be the number of input bytes (for example, it should be between 4*input_len - 3 and
 # 4*input_len).
-# Returns the 256 as 2 128-big big-endian integers.
+# Returns the 256 output bits as 2 128-bit big-endian integers.
 @view
 func compute_sha256{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
         input_len : felt, input : felt*, n_bytes : felt) -> (res0 : felt, res1 : felt):
